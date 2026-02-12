@@ -3,205 +3,171 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💖 My Valentine 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <title>My Valentine 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       min-height: 100vh;
-      color: #333;
-      text-align: center;
-    }
-
-    header {
-      padding: 24px 16px 12px;
-      font-family: 'Playfair Display', serif;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      color: #b1004b;
-    }
-
-    header p {
-      margin: 6px 0 0;
-      font-size: 1rem;
-      opacity: 0.85;
+      background: radial-gradient(circle at top, #222 0%, #000 60%),
+                  url('https://i.imgur.com/9Z3sZ7S.png');
+      background-size: cover;
+      background-blend-mode: screen;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
     }
 
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 16px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
     }
 
-    .card {
-      background: rgba(255,255,255,0.92);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
     }
 
-    .card h2 {
-      margin-top: 0;
-      color: #b1004b;
-      font-family: 'Playfair Display', serif;
-    }
-
-    /* Buttons */
-    .gift-buttons {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 14px;
-      padding: 14px;
+    .subtitle {
       font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 25px;
+    }
+
+    .gift-box {
+      width: 280px;
+      height: 380px;
+      margin: 0 auto;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #111, #000);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 25px rgba(255,255,255,0.15);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gift-box:hover { transform: scale(1.05); }
+
+    .gift-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://i.imgur.com/3P5wP2L.png') center/contain no-repeat;
+      opacity: 0.25;
+    }
+
+    .gift-content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+    }
+
+    .gift-content h2 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .open-btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border-radius: 25px;
+      border: none;
       font-weight: 600;
       cursor: pointer;
-      background: linear-gradient(135deg, #ff5f9e, #ff2f6d);
-      color: #fff;
-      transition: transform .15s ease, box-shadow .15s ease;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      transition: 0.3s;
     }
 
-    .btn:active { transform: scale(0.98); }
+    .open-btn:hover { background: #ddd; }
 
-    /* Sections */
-    .section { display: none; }
-    .section.active { display: block; }
-
-    /* Spotify */
-    .spotify-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
     }
 
-    iframe { border-radius: 12px; }
-
-    /* Gallery */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+    .popup-content {
+      background: #000;
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 450px;
+      text-align: center;
+      animation: zoom 0.4s ease;
     }
 
-    .gallery img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 14px;
+    @keyframes zoom { from { transform: scale(0.7); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+
+    .popup-content img {
+      width: 150px;
+      margin-bottom: 15px;
     }
 
-    /* Letter */
-    .letter {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      text-align: left;
-      white-space: pre-line;
+    .popup-content p { font-size: 1.05rem; line-height: 1.6; }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 8px 20px;
+      background: white;
+      color: black;
+      border-radius: 25px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
     }
 
-    footer {
-      margin-top: 12px;
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
-
-    @media (min-width: 600px) {
-      .gift-buttons { grid-template-columns: repeat(3, 1fr); }
-      .gallery { grid-template-columns: repeat(3, 1fr); }
-    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>💝 Happy Valentine’s Day 💝</h1>
-  <p>Three little gifts, only for you</p>
-</header>
+  <div class="container">
+    <h1>For My Valentine 🤍</h1>
+    <p class="subtitle">Tap the gift to open your surprise</p>
 
-<div class="container">
-
-  <div class="card">
-    <div class="gift-buttons">
-      <button class="btn" onclick="showSection('songs')">🎵 Gift 1: Our Songs</button>
-      <button class="btn" onclick="showSection('photos')">📸 Gift 2: Our Memories</button>
-      <button class="btn" onclick="showSection('letter')">💌 Gift 3: My Letter</button>
+    <div class="gift-box" onclick="openGift()">
+      <div class="gift-bg"></div>
+      <div class="gift-content">
+        <h2>🎁 Your Gift</h2>
+        <button class="open-btn">Open</button>
+      </div>
     </div>
   </div>
 
-  <!-- SONGS -->
-  <div id="songs" class="card section">
-    <h2>🎵 Our Special Songs</h2>
-    <p>Replace these Spotify links with your favorite 10 songs 💕</p>
-    <div class="spotify-grid">
-      <!-- Replace TRACK_ID with Spotify track IDs -->
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID1" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID2" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID3" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID4" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID5" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID6" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID7" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID8" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID9" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/TRACK_ID10" width="100%" height="80" frameborder="0" allow="encrypted-media"></iframe>
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <img src="https://i.imgur.com/3P5wP2L.png" alt="Bubu Dudu" />
+      <p>
+        My love 🤍<br><br>
+        Every moment with you feels magical, like a beautiful galaxy full of stars ✨
+        You are my happiness, my peace, and my forever. I love you more than words can express 💖
+      </p>
+      <button class="close-btn" onclick="closeGift()">Close</button>
     </div>
   </div>
 
-  <!-- PHOTOS -->
-  <div id="photos" class="card section">
-    <h2>📸 Our Favorite Memories</h2>
-    <p>Replace image URLs with your own photos 💖</p>
-    <div class="gallery">
-      <img src="https://picsum.photos/300/300?1" alt="memory">
-      <img src="https://picsum.photos/300/300?2" alt="memory">
-      <img src="https://picsum.photos/300/300?3" alt="memory">
-      <img src="https://picsum.photos/300/300?4" alt="memory">
-      <img src="https://picsum.photos/300/300?5" alt="memory">
-      <img src="https://picsum.photos/300/300?6" alt="memory">
-    </div>
-  </div>
-
-  <!-- LETTER -->
-  <div id="letter" class="card section">
-    <h2>💌 My Valentine Letter</h2>
-    <div class="letter">
-Hey my love,
-
-From the moment you came into my life, everything changed in the most beautiful way. You make my ordinary days feel special, and my special days unforgettable.
-
-Every smile of yours, every little thing you do, stays in my heart. Thank you for being my comfort, my happiness, and my safe place.
-
-I can’t wait to create many more memories with you. Happy Valentine’s Day, my forever person 💖
-
-Love always,
-Your girl ❤️
-    </div>
-  </div>
-
-</div>
-
-<footer>Made with love 💕</footer>
-
-<script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-</script>
+  <script>
+    function openGift() {
+      document.getElementById('popup').style.display = 'flex';
+    }
+    function closeGift() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>
